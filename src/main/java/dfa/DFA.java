@@ -2,7 +2,7 @@ package dfa;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import token.TokenType;
+import token.Token;
 
 public abstract class DFA {
 
@@ -15,7 +15,7 @@ public abstract class DFA {
         states = new DFAState[stateNumber];
     }
 
-    public Pair<Integer, Pair<TokenType, Object>> walk(String line, int startPos) {
+    public Pair<Integer, Token> walk(String line, int startPos) {
         if (startPos >= line.length()) {
             throw new IllegalArgumentException("The value of startPos exceeds the length of line");
         }
@@ -35,11 +35,16 @@ public abstract class DFA {
 //            System.out.println(nextState.getComment());
             curPos++;
         }
-        return new ImmutablePair<>(curPos, analyze(curState, line.substring(startPos, curPos)));
+        if (curState.isAccept()) {
+            return new ImmutablePair<>(curPos, analyze(curState, line.substring(startPos, curPos)));
+        }
+        else {
+            return new ImmutablePair<>(curPos, null);
+        }
     }
 
     public abstract boolean isLegalEndChar(char ch, DFAState state);
 
-    public abstract Pair<TokenType, Object> analyze(DFAState state, String token);
+    public abstract Token analyze(DFAState state, String token);
 
 }

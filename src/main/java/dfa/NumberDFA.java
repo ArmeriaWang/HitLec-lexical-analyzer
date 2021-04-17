@@ -2,6 +2,7 @@ package dfa;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import token.Token;
 import token.TokenType;
 import static token.Utils.*;
 import static token.TokenType.*;
@@ -54,23 +55,23 @@ public class NumberDFA extends DFA {
     }
 
     @Override
-    public Pair<TokenType, Object> analyze(DFAState state, String token) {
+    public Token analyze(DFAState state, String token) {
         if (state.getTokenType().equals(CONST_INTEGER)) {
             if (token.equals("0")) {
-                return new ImmutablePair<>(CONST_INTEGER, 0);
+                return new Token(CONST_INTEGER, 0);
             }
             else if (!token.startsWith("0")) {
-                return new ImmutablePair<>(CONST_INTEGER, Integer.parseInt(token));
+                return new Token(CONST_INTEGER, Integer.parseInt(token));
             }
             else if (token.startsWith("0x") || token.startsWith("0X")){
-                return new ImmutablePair<>(CONST_INTEGER, Integer.parseInt(token.substring(2), 16));
+                return new Token(CONST_INTEGER, Integer.parseInt(token.substring(2), 16));
             }
             else {
-                return new ImmutablePair<>(CONST_INTEGER, Integer.parseInt(token.substring(1), 8));
+                return new Token(CONST_INTEGER, Integer.parseInt(token.substring(1), 8));
             }
         }
         else {
-            return new ImmutablePair<>(CONST_FLOAT, Float.parseFloat(token));
+            return new Token(CONST_FLOAT, Float.parseFloat(token));
         }
 
     }

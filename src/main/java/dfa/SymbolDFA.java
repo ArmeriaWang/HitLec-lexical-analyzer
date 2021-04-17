@@ -1,8 +1,6 @@
 package dfa;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-import token.TokenType;
+import token.Token;
 
 import static token.TokenType.*;
 import static token.Utils.*;
@@ -23,7 +21,7 @@ public class SymbolDFA extends DFA {
         states[4] = new DFAState("4, accept, ;", SEMICOLON, "/+-!;.({}_'\"" + digits + letters);
         states[5] = new DFAState("5, accept, .", DOT, "/_" + letters);
         states[6] = new DFAState("6, accept, [", SQUARE_LEFT, "/+-!.(_" + digits + letters);
-        states[7] = new DFAState("7, accept, ]", SQUARE_RIGHT, "/=<>+-*%|&^~!;,.)");
+        states[7] = new DFAState("7, accept, ]", SQUARE_RIGHT, "/=<>+-*%|&^~!;,.)[");
         states[8] = new DFAState("8, accept, (", ROUND_LEFT, "/+-!()_'\"" + digits + letters);
         states[9] = new DFAState("9, accept, )", ROUND_RIGHT, "/=<>+-*%|&^~!;,{]");
 
@@ -94,8 +92,8 @@ public class SymbolDFA extends DFA {
     }
 
     @Override
-    public Pair<TokenType, Object> analyze(DFAState state, String token) {
-        return new ImmutablePair<>(state.getTokenType(), null);
+    public Token analyze(DFAState state, String token) {
+        return new Token(state.getTokenType(), null);
     }
 }
 

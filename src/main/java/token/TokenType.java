@@ -14,6 +14,7 @@ public enum TokenType {
     KW_FOR,
     KW_IF,
     KW_ELSE,
+    KW_RETURN,
 
     DT_INTEGER,
     DT_FLOAT,

@@ -1,10 +1,7 @@
 package dfa;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
+import token.Token;
 import token.TokenType;
-
-import static token.Utils.*;
 
 public class CommentDFA extends DFA {
 
@@ -44,7 +41,7 @@ public class CommentDFA extends DFA {
     }
 
     @Override
-    public Pair<TokenType, Object> analyze(DFAState state, String token) {
-        return new ImmutablePair<>(TokenType.COMMENT, token.substring(2, token.length() - 2));
+    public Token analyze(DFAState state, String token) {
+        return new Token(TokenType.COMMENT, token.substring(2, token.length() - 2));
     }
 }

@@ -1,4 +1,4 @@
-abc123+_1a2bc3 abc123 1234 1253.212 1e20 1e+20 0x12f3 1.123e+16;
+abc123+_1a2bc3 abc123 1234 1253.212 1e20 1e+20 0x12f3 1.123e+16  1.123123e-100;
 123123e123123e123
 123123.123123.123
 1253.212 1e20
@@ -15,5 +15,11 @@ aae%0x3e8&&flag||kl~!9&1&0xfffff|3.123e9=5;
 i+a[0xB]-j;
 int main() {
     int x=sqrt(a[0x100]);
+    printf("Hello World!\n");
+    return 0;
 }
 /*This is a comment*/
+/*a
+int a*p
++=*
+123.123.123

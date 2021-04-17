@@ -3,6 +3,7 @@ package dfa;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import token.IdentifierTable;
+import token.Token;
 import token.TokenType;
 
 import java.util.HashMap;
@@ -24,6 +25,7 @@ public class IdentifierKeywordDFA extends DFA {
         put("for", KW_FOR);
         put("if", KW_IF);
         put("else", KW_ELSE);
+        put("return", KW_RETURN);
         put("int", DT_INTEGER);
         put("float", DT_FLOAT);
         put("bool", DT_BOOLEAN);
@@ -49,13 +51,13 @@ public class IdentifierKeywordDFA extends DFA {
     }
 
     @Override
-    public Pair<TokenType, Object> analyze(DFAState state, String token) {
+    public Token analyze(DFAState state, String token) {
         if (token2attribute.containsKey(token.toLowerCase())) {
-            return new ImmutablePair<>(token2attribute.get(token.toLowerCase()), null);
+            return new Token(token2attribute.get(token.toLowerCase()), null);
         }
         else {
             IdentifierTable.addIdentifier(token);
-            return new ImmutablePair<>(TokenType.IDENTIFIER, token);
+            return new Token(TokenType.IDENTIFIER, token);
         }
     }
 

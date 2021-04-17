@@ -1,7 +1,6 @@
 import dfa.*;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.commons.lang3.tuple.Triple;
-import token.TokenType;
+import token.Token;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,6 +20,7 @@ public class Main {
         dfaList.add(NumberDFA.getSingleInstance());
         dfaList.add(SymbolDFA.getSingleInstance());
         dfaList.add(CommentDFA.getSingleInstance());
+        dfaList.add(StringConstDFA.getSingleInstance());
         int lineNum = 0;
         while (scanner.hasNextLine()) {
             lineNum++;
@@ -30,12 +30,12 @@ public class Main {
             while (pos < line.length()) {
                 boolean accept = false;
                 for (DFA dfa: dfaList) {
-                    Pair<Integer, Pair<TokenType, Object>> pair = dfa.walk(line, pos);
+                    Pair<Integer, Token> pair = dfa.walk(line, pos);
                     int nextPos = pair.getLeft();
-                    Pair<TokenType, Object> tokenInfo = pair.getRight();
+                    Token token = pair.getRight();
 //                System.out.println(nextPos);
-                    if (tokenInfo != null) {
-                        System.out.println(line.substring(pos, nextPos) + " " + tokenInfo);
+                    if (token != null) {
+                        System.out.println(token);
                         pos = nextPos;
                         accept = true;
                         break;
