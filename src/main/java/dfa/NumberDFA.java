@@ -8,6 +8,9 @@ import static token.Utils.*;
 import static token.TokenType.*;
 
 
+/**
+ * 数字DFA（可处理十进制数、浮点数、科学计数法、八进制和十六进制数）。单例模式。
+ */
 public class NumberDFA extends DFA {
 
     private static final int stateNumber = 10;
@@ -31,9 +34,9 @@ public class NumberDFA extends DFA {
         states[0].addTransition("0", states[6]);
         states[1].addTransition(digits, states[1]);
         states[1].addTransition(".", states[2]);
-        states[1].addTransition("e", states[3]);
+        states[1].addTransition("eE", states[3]);
         states[2].addTransition(digits, states[2]);
-        states[2].addTransition("e", states[3]);
+        states[2].addTransition("eE", states[3]);
         states[3].addTransition(digits, states[4]);
         states[3].addTransition("+-", states[5]);
         states[4].addTransition(digits, states[4]);
@@ -50,8 +53,8 @@ public class NumberDFA extends DFA {
     }
 
     @Override
-    public boolean isLegalEndChar(char ch, DFAState state) {
-        return isBlankChar(ch) || commonLegalEndChars.contains(String.valueOf(ch));
+    public boolean isLegalEndChar(char c, DFAState state) {
+        return isBlankChar(c) || commonLegalEndChars.contains(String.valueOf(c));
     }
 
     @Override

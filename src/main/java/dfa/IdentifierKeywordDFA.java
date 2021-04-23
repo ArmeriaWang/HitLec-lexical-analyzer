@@ -1,7 +1,5 @@
 package dfa;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 import token.IdentifierTable;
 import token.Token;
 import token.TokenType;
@@ -13,6 +11,9 @@ import static token.TokenType.*;
 import static token.Utils.*;
 
 
+/**
+ * 标识符和关键字DFA。单例模式。
+ */
 public class IdentifierKeywordDFA extends DFA {
 
     private static final int stateNumber = 2;
@@ -30,6 +31,9 @@ public class IdentifierKeywordDFA extends DFA {
         put("float", DT_FLOAT);
         put("bool", DT_BOOLEAN);
         put("struct", DT_STRUCT);
+        put("string", DT_STRING);
+        put("true", CONST_BOOLEAN);
+        put("false", CONST_BOOLEAN);
     }};
 
     private IdentifierKeywordDFA() {
@@ -46,18 +50,26 @@ public class IdentifierKeywordDFA extends DFA {
     }
 
     @Override
-    public boolean isLegalEndChar(char ch, DFAState state) {
-        return isBlankChar(ch) || commonLegalEndChars.contains(String.valueOf(ch));
+    public boolean isLegalEndChar(char c, DFAState state) {
+        return isBlankChar(c) || commonLegalEndChars.contains(String.valueOf(c));
     }
 
+    /**
+     * 根据自动机接受状态和token字符串分析token类型和值。
+     * 若是标识符Identifier，则加入{@code IdentifierTable}中
+     * @param state 最后接受该token的状态
+     * @param token token字符串
+     * @return Token实例，包括token类别和token值
+     */
     @Override
     public Token analyze(DFAState state, String token) {
         if (token2attribute.containsKey(token.toLowerCase())) {
             return new Token(token2attribute.get(token.toLowerCase()), null);
         }
         else {
-            IdentifierTable.addIdentifier(token);
-            return new Token(TokenType.IDENTIFIER, token);
+            Token identifier = new Token(TokenType.IDENTIFIER, token);
+            IdentifierTable.addIdentifier(identifier);
+            return identifier;
         }
     }
 

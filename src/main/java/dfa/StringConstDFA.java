@@ -3,6 +3,9 @@ package dfa;
 import token.Token;
 import token.TokenType;
 
+/**
+ * 字符串常量DFA。单例模式。
+ */
 public class StringConstDFA extends DFA {
 
     private static final int stateNumber = 5;
@@ -31,7 +34,7 @@ public class StringConstDFA extends DFA {
     }
 
     @Override
-    public boolean isLegalEndChar(char ch, DFAState state) {
+    public boolean isLegalEndChar(char c, DFAState state) {
         return true;
     }
 

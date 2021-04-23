@@ -6,6 +6,9 @@ import static token.TokenType.*;
 import static token.Utils.*;
 
 
+/**
+ * 各类符号DFA。单例模式。
+ */
 public class SymbolDFA extends DFA {
 
     private static final int stateNumber = 30;
@@ -87,8 +90,8 @@ public class SymbolDFA extends DFA {
     }
 
     @Override
-    public boolean isLegalEndChar(char ch, DFAState state) {
-        return isBlankChar(ch) || state.isLegalEndChar(ch);
+    public boolean isLegalEndChar(char c, DFAState state) {
+        return isBlankChar(c) || state.isLegalEndChar(c);
     }
 
     @Override

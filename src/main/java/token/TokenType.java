@@ -3,7 +3,6 @@ package token;
 public enum TokenType {
     IDENTIFIER,
 
-    CONST_NUMBER,
     CONST_INTEGER,
     CONST_FLOAT,
     CONST_BOOLEAN,

@@ -36,7 +36,7 @@ public class CommentDFA extends DFA {
     }
 
     @Override
-    public boolean isLegalEndChar(char ch, DFAState state) {
+    public boolean isLegalEndChar(char c, DFAState state) {
         return true;
     }
 
