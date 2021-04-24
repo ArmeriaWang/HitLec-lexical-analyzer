@@ -1,5 +1,8 @@
 package token;
 
+/**
+ * token类型
+ */
 public enum TokenType {
     IDENTIFIER,
 

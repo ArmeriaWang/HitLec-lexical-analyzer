@@ -5,7 +5,7 @@ import token.TokenType;
 
 public class CommentDFA extends DFA {
 
-    private static final int stateNumber = 20;
+    private static final int stateNumber = 5;
     private static final CommentDFA instance = new CommentDFA();
 
     public static CommentDFA getSingleInstance() {

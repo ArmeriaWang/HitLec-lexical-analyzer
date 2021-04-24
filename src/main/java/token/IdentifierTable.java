@@ -15,7 +15,7 @@ public class IdentifierTable {
     /**
      * 添加标识符
      * @param token 标识符
-     * @return
+     * @return 该标识符的hash值
      */
     public static int addIdentifier(Token token) {
         if (token.getTokenType() != TokenType.IDENTIFIER) {

@@ -15,7 +15,7 @@ public class Main {
     private static final List<DFA> dfaList = new ArrayList<>();
 
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("src/main/java/test.txt"));
+        Scanner scanner = new Scanner(new File("src/main/java/test4report.c"));
         dfaList.add(IdentifierKeywordDFA.getSingleInstance());
         dfaList.add(NumberDFA.getSingleInstance());
         dfaList.add(SymbolDFA.getSingleInstance());

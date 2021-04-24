@@ -2,6 +2,10 @@ package token;
 
 import java.util.*;
 
+
+/**
+ * 辅助方法和参数
+ */
 public class Utils {
 
     private static final List<String> keywordList = Arrays.asList(

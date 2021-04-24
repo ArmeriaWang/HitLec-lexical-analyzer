@@ -1,3 +1,4 @@
+"sdfo\\as\a\n\t\"\\\""
 abc123+_1a2bc3 abc123 1234 1253.212 1e20 1e+20 0x12f3 1.123e+16  1.123123e-100;
 123123e123123e123
 123123.123123.123
@@ -30,6 +31,7 @@ struct xxx {
     int x;
 };
 /*This is a comment*/
+/*This is also *a *comment ***/
 /*a
 int a*p
 +=*
