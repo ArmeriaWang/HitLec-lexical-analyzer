@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static token.TokenType.*;
-import static token.Utils.*;
+import static main.Utils.*;
 
 
 /**
@@ -18,7 +18,7 @@ public class IdentifierKeywordDFA extends DFA {
 
     private static final int stateNumber = 2;
     private static final IdentifierKeywordDFA instance = new IdentifierKeywordDFA();
-    private static final String commonLegalEndChars = "=<>+-%*/|&^~!;.()[]{";
+    private static final String commonLegalEndChars = "=<>+-%*/|&^~!;,.()[]{";
 
     private static final Map<String, TokenType> token2attribute = new HashMap<>() {{
         put("do", KW_DO);
@@ -27,10 +27,11 @@ public class IdentifierKeywordDFA extends DFA {
         put("if", KW_IF);
         put("else", KW_ELSE);
         put("return", KW_RETURN);
+        put("function", KW_FUNCTION);
         put("int", DT_INTEGER);
         put("float", DT_FLOAT);
         put("bool", DT_BOOLEAN);
-        put("struct", DT_STRUCT);
+        put("struct", KW_STRUCT);
         put("string", DT_STRING);
         put("true", CONST_BOOLEAN);
         put("false", CONST_BOOLEAN);

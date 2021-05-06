@@ -1,4 +1,6 @@
-package token;
+package main;
+
+import token.Position;
 
 import java.util.*;
 
@@ -24,4 +26,5 @@ public class Utils {
     public static boolean isBlankChar(char c) {
         return " \r\n\t".contains(String.valueOf(c));
     }
+
 }

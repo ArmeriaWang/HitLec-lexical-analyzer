@@ -1,5 +1,7 @@
 package token;
 
+import main.LexicalParser;
+
 import java.util.Objects;
 
 /**
@@ -9,10 +11,48 @@ public class Token {
 
     private final TokenType tokenType;
     private final Object value;
+    private final Position position;
 
-    public Token(TokenType tokenType, Object value) {
+    public Token(TokenType tokenType, Object value, Position position) {
         this.value = value;
         this.tokenType = tokenType;
+        this.position = position;
+    }
+
+    public Token(TokenType tokenType, Object value) {
+        this.tokenType = tokenType;
+        this.value = value;
+        this.position = LexicalParser.getCurrentPosition();
+    }
+
+    public static Token parseToken(String line1, String line2) {
+        TokenType tokenType;
+        Object value = null;
+        if (line1.length() < 2) {
+            throw new IllegalArgumentException();
+        }
+
+        for (int i = 1; i < line1.length() - 1; i++) {
+            if (line1.charAt(i) == ',') {
+                tokenType = TokenType.valueOf(line1.substring(1, i).trim());
+                String valueString = line1.substring(i + 1,line1.length() - 1);
+                switch (tokenType) {
+                    case CONST_INTEGER:
+                        value = Integer.parseInt(valueString);
+                        break;
+                    case CONST_BOOLEAN:
+                        value = Boolean.parseBoolean(valueString);
+                        break;
+                    case CONST_FLOAT:
+                        value = Float.parseFloat(valueString);
+                        break;
+                    case CONST_STRING:
+                        value = valueString;
+                }
+                return new Token(tokenType, value, Position.parsePosition(line2));
+            }
+        }
+        throw new IllegalArgumentException();
     }
 
     public Object getValue() {
@@ -23,9 +63,13 @@ public class Token {
         return tokenType;
     }
 
+    public Position getPosition() {
+        return position;
+    }
+
     @Override
     public String toString() {
-        return String.format("(%-13s,%s)", tokenType, value == null ? "" : value.toString());
+        return String.format("(%-13s,%s)\n%s", tokenType, value == null ? "" : value.toString(), position);
     }
 
     @Override

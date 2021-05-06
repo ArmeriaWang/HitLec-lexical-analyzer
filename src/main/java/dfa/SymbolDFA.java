@@ -3,7 +3,7 @@ package dfa;
 import token.Token;
 
 import static token.TokenType.*;
-import static token.Utils.*;
+import static main.Utils.*;
 
 
 /**
@@ -13,22 +13,21 @@ public class SymbolDFA extends DFA {
 
     private static final int stateNumber = 30;
     private static final SymbolDFA instance = new SymbolDFA();
-    private static final String legalEndChars = "=<>+-%*/|&^~!;.(){}[]_'\"";
 
     private SymbolDFA() {
         super(stateNumber);
         states[0] = new DFAState("0, start");
-        states[1] = new DFAState("1, accept, {", BEGIN, "/+-!;.({}_'\"" + digits + letters);
-        states[2] = new DFAState("2, accept, }", END, "/+-!;.({}_'\"" + digits + letters);
-        states[3] = new DFAState("3, accept, ,", COMMA, "/+-!;(_'\"" + digits + letters);
-        states[4] = new DFAState("4, accept, ;", SEMICOLON, "/+-!;.({}_'\"" + digits + letters);
+        states[1] = new DFAState("1, accept, {", BEGIN, "/+-*!&;.({}_'\"" + digits + letters);
+        states[2] = new DFAState("2, accept, }", END, "/+-*!;.({}_'\"" + digits + letters);
+        states[3] = new DFAState("3, accept, ,", COMMA, "/+-*!;&(_'\"" + digits + letters);
+        states[4] = new DFAState("4, accept, ;", SEMICOLON, "/+-*&!;.({}_'\"" + digits + letters);
         states[5] = new DFAState("5, accept, .", DOT, "/_" + letters);
-        states[6] = new DFAState("6, accept, [", SQUARE_LEFT, "/+-!.(_" + digits + letters);
+        states[6] = new DFAState("6, accept, [", SQUARE_LEFT, "/+-!*&.(_]" + digits + letters);
         states[7] = new DFAState("7, accept, ]", SQUARE_RIGHT, "/=<>+-*%|&^~!;,.)[");
-        states[8] = new DFAState("8, accept, (", ROUND_LEFT, "/+-!()_'\"" + digits + letters);
-        states[9] = new DFAState("9, accept, )", ROUND_RIGHT, "/=<>+-*%|&^~!;,{]");
+        states[8] = new DFAState("8, accept, (", ROUND_LEFT, "/+-*&!~()_'\"" + digits + letters);
+        states[9] = new DFAState("9, accept, )", ROUND_RIGHT, "/=<>+-*%|&^~!;,{])");
 
-        final String operatorLegalChars = "/+-~!(_" + digits + letters;
+        final String operatorLegalChars = "/+-*~!(_&" + digits + letters;
         states[10] = new DFAState("10, accept, ==", EQUAL, operatorLegalChars);
         states[11] = new DFAState("11, accept, >", GREATER, operatorLegalChars);
         states[12] = new DFAState("12, accept, >=", GREATER_EQUAL, operatorLegalChars);
@@ -36,15 +35,15 @@ public class SymbolDFA extends DFA {
         states[14] = new DFAState("14, accept, <=", LESS_EQUAL, operatorLegalChars);
         states[15] = new DFAState("15, accept, !=", NOT_EQUAL, operatorLegalChars);
 
-        states[16] = new DFAState("16, accept, +", ADD, operatorLegalChars);
+        states[16] = new DFAState("16, accept, +", PLUS, operatorLegalChars);
         states[17] = new DFAState("17, accept, -", MINUS, operatorLegalChars);
-        states[18] = new DFAState("18, accept, *", MULTIPLY, operatorLegalChars);
+        states[18] = new DFAState("18, accept, *", STAR, operatorLegalChars);
         states[19] = new DFAState("19, accept, /", DIVIDE, operatorLegalChars);
         states[20] = new DFAState("20, accept, %", MOD, operatorLegalChars);
         states[21] = new DFAState("21, accept, &&", LOGIC_AND, operatorLegalChars);
         states[22] = new DFAState("22, accept, ||", LOGIC_OR, operatorLegalChars);
         states[23] = new DFAState("23, accept, !", LOGIC_NOT, operatorLegalChars);
-        states[24] = new DFAState("24, accept, &", BIT_AND, operatorLegalChars);
+        states[24] = new DFAState("24, accept, &", AMPERSAND, operatorLegalChars);
         states[25] = new DFAState("25, accept, |", BIT_OR, operatorLegalChars);
         states[26] = new DFAState("26, accept, ~", BIT_NOT, operatorLegalChars);
         states[27] = new DFAState("27, accept, ^", BIT_XOR, operatorLegalChars);
@@ -99,42 +98,3 @@ public class SymbolDFA extends DFA {
         return new Token(state.getTokenType(), null);
     }
 }
-
-/**
- * private static final Map<String, TokenType> token2attribute = new HashMap<>() {{
- *         put("==", EQUAL);
- *         put(">", GREATER);
- *         put(">=", GREATER_EQUAL);
- *         put("<", LESS);
- *         put("<=", LESS_EQUAL);
- *         put("!=", NOT_EQUAL);
- *
- *         put("+", ADD);
- *         put("-", MINUS);
- *         put("*", MULTIPLY);
- *         put("/", DIVIDE);
- *         put("%", MOD);
- *         put("&&", LOGIC_AND);
- *         put("||", LOGIC_OR);
- *         put("!", LOGIC_NOT);
- *         put("&", BIT_AND);
- *         put("|", BIT_OR);
- *         put("^", BIT_XOR);
- *         put("~", BIT_NOT);
- *
- *         put("=", ASSIGNMENT);
- *         put("+=", ASN_PLUS);
- *         put("-=", ASN_MINUS);
- *         put("*=", ASN_MULTIPLY);
- *         put("/=", ASN_DIVIDE);
- *         put("%=", ASN_MOD);
- *
- *         put("{", BEGIN);
- *         put("}", END);
- *         put(",", COMMA);
- *         put(";", SEMICOLON);
- *         put(".", DOT);
- *         put("[", SQUARE_LEFT);
- *         put("]", SQUARE_RIGHT);
- *     }};
- */

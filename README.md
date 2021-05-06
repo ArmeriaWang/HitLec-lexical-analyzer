@@ -8,7 +8,7 @@ $ cd ./Lab1-1183710106
 $ mvn install
 
 # 运行jar包
-$ java -cp .\target\Lab1-1183710106-1.0-SNAPSHOT.jar Main
+$ java -cp .\target\Lab1-1183710106-1.0-SNAPSHOT.jar main.LexicalParser
 ```
 
 测试文件在 `src\main\java` 目录下，文件名为 `text4report.c` 。

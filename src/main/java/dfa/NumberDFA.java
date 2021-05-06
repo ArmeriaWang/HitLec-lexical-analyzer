@@ -1,10 +1,8 @@
 package dfa;
 
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 import token.Token;
-import token.TokenType;
-import static token.Utils.*;
+
+import static main.Utils.*;
 import static token.TokenType.*;
 
 
@@ -15,7 +13,7 @@ public class NumberDFA extends DFA {
 
     private static final int stateNumber = 10;
     private static final NumberDFA instance = new NumberDFA();
-    private static final String commonLegalEndChars = "/=<>%+-*|&^~!;)]";
+    private static final String commonLegalEndChars = "/=<>%+-*|&^~!,;)]";
 
     private NumberDFA() {
         super(stateNumber);
@@ -42,6 +40,7 @@ public class NumberDFA extends DFA {
         states[4].addTransition(digits, states[4]);
         states[5].addTransition(digits, states[4]);
         states[6].addTransition("xX", states[7]);
+        states[6].addTransition(".", states[2]);
         states[6].addTransition("01234567", states[9]);
         states[7].addTransition(digits + "abcdefABCDEF", states[8]);
         states[8].addTransition(digits + "abcdefABCDEF", states[8]);
