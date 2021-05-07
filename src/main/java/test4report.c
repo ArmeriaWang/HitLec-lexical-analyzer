@@ -33,7 +33,7 @@ function int printNode(struct Node *node, int times) {
 
 struct Node {
     struct Node *from, *to;
-    float *weight;
+    float weight;
 };
 
 int global_init = 123, global_non_init;
@@ -42,6 +42,7 @@ function int main() {
     struct Edge {
         int from, to;
         float weight;
+        struct Node from_node[20], to_node;
     };
     struct Edge edge[100];
     int x = getMin(edge[0].from, edge[1].from);
@@ -51,5 +52,11 @@ function int main() {
 
     struct Node node;
     printNode(&node, 0777);
+
+    struct Edge *hd_arr[3][3 * 3][2 + 0x3fff % 077];
+    hd_arr[0][1][2] = &edge[3];
+
+    edge[99].from_node[1].weight = 1.123e7;
+
     return 0;
 }
